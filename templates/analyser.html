@@ -1,0 +1,312 @@
+{% extends "index.html" %}
+
+{% block graphs %}
+
+{# Load the AJAX API #}
+
+{#
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> #}
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+    // Load the Visualization API and the piechart package.
+    google.load('visualization', '1', {'packages': ['corechart']});
+    google.load('visualization', '1', {
+        'packages': ["geochart"],
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+    });
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.setOnLoadCallback(drawChart);
+
+    // Callback that creates and populates a data table,
+    // instantiates the pie chart, passes in the data and draws it.
+    function drawChart() {
+        // Create the data table.
+        var data1 = new google.visualization.DataTable();
+
+        data1.addColumn('string', 'Languages');
+        data1.addColumn('number', 'Usage');
+        data1.addColumn({type: 'number', role: 'tooltip'});
+        data1.addRows({{lang_data | safe}});
+        // Set chart options
+        var options1 = {
+            "title": 'Most used languages on Twitter: All Tweets',
+            "width": 800,
+            "height": 600,
+            "pieHole": 0.3,
+            "is3D": true,
+            "chartArea": {
+                "width": '80%',
+                "height": '80%'
+            }
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chart1 = new google.visualization.PieChart(document.getElementById('chart_div1'));
+        chart1.draw(data1, options1);
+
+        // ------------------------------------------------------------------//
+
+        var data2 = new google.visualization.DataTable();
+
+        data2.addColumn('string', 'Languages');
+        data2.addColumn('number', 'Usage');
+        data2.addColumn({type: 'number', role: 'annotation'});
+        data2.addRows({{top_lang_data | safe}});
+        // Set chart options
+        var options2 = {
+            "title": 'Most used languages on Twitter: Top Tweets',
+            "width": 800,
+            "height": 600,
+            "pieHole": 0.3,
+            "is3D": true,
+            "chartArea": {
+                "width": '80%',
+                "height": '80%'
+            }
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
+
+        // ------------------------------------------------------------------//
+
+        var data3 = new google.visualization.DataTable();
+        data3.addColumn('string', 'Words');
+        data3.addColumn('number', 'Usage');
+        data3.addColumn({type: 'number', role: 'annotation'});
+        data3.addRows({{love_words | safe}});
+        // Set chart options
+        var options3 = {
+            "title": 'Kind Words vs Swear Words',
+            "width": 800,
+            "height": 600,
+            "pieHole": 0.3,
+            "is3D": true,
+            "chartArea": {
+                "width": '80%',
+                "height": '80%'
+            }
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chart3 = new google.visualization.PieChart(document.getElementById('chart_div3'));
+        chart3.draw(data3, options3);
+
+        // ------------------------------------------------------------------//
+
+        var data4 = google.visualization.arrayToDataTable({{country_data | safe}});
+        var options4 = {
+            "colorAxis": {
+                "colors": ['green', 'blue', 'red']
+            },
+            "width": 800,
+            "height": 600,
+            "is3D": true,
+            "chartArea": {
+                "width": '80%',
+                "height": '80%'
+            }
+        };
+        var chart4 = new google.visualization.GeoChart(document.getElementById('chart_div4'));
+        chart4.draw(data4, options4);
+
+        // ------------------------------------------------------------------//
+
+        var data5 = new google.visualization.DataTable();
+
+        data5.addColumn('string', 'Programmin Langauges');
+        data5.addColumn('number', 'Usage');
+        data5.addColumn({type: 'number', role: 'annotation'});
+        data5.addRows({{pro_lang_data | safe}});
+        // Set chart options
+        var options5 = {
+            "title": 'Most used Programming Languages on Twitter',
+            "width": 800,
+            "height": 600,
+            "pieHole": 0.3,
+            "is3D": true,
+            "chartArea": {
+                "width": '80%',
+                "height": '80%'
+            }
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chart5 = new google.visualization.PieChart(document.getElementById('chart_div5'));
+        chart5.draw(data5, options5);
+
+        // ------------------------------------------------------------------//
+
+        var data6 = new google.visualization.DataTable();
+
+        data6.addColumn('string', 'Hashtags');
+        data6.addColumn('number', 'Mentions');
+        data6.addColumn({type: 'number', role: 'annotation'});
+        data6.addRows({{hashtag_data | safe}});
+        // Set chart options
+        var options6 = {
+            "title": 'Most Trending Hashtags on Twitter',
+            "width": 800,
+            "height": 600,
+            "pieHole": 0.3,
+            "is3D": true,
+            "chartArea": {
+                "width": '80%',
+                "height": '80%'
+            }
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chart6 = new google.visualization.PieChart(document.getElementById('chart_div6'));
+        chart6.draw(data6, options6);
+
+        // ------------------------------------------------------------------//
+
+        var data7 = new google.visualization.DataTable();
+
+        data7.addColumn('string', 'Topics');
+        data7.addColumn('number', 'Category');
+        data7.addColumn({type: 'number', role: 'annotation'});
+        data7.addRows({{topics_data | safe}});
+        // Set chart options
+        var options7 = {
+            "title": 'Most Trending Topics on Twitter',
+            "width": 800,
+            "height": 600,
+            "pieHole": 0.3,
+            "is3D": true,
+            "chartArea": {
+                "width": '80%',
+                "height": '80%'
+            }
+        };
+        // Instantiate and draw our chart, passing in some options.
+        var chart7 = new google.visualization.PieChart(document.getElementById('chart_div7'));
+        chart7.draw(data7, options7);
+
+        // ------------------------------------------------------------------//
+
+        var data8 = new google.visualization.DataTable();
+        data8.addColumn('string', 'Topic');
+        data8.addColumn('number', 'No.of Tweets');
+        data8.addColumn({type: 'number', role: 'annotation'});
+        data8.addRows({{topics_data | safe}});
+        var options8 = {
+            "title": 'Most Popular Topics on Twitter',
+            "chartArea": {
+                "width": "70%",
+                "height":"70%"
+            },
+            "hAxis": {
+                "title": 'No.of Tweets',
+                "minValue": 0
+            },
+            "vAxis": {
+                "title": 'Topic'
+            },
+            'width': 800,
+            'height': 600,
+            "bar": {
+                "groupWidth": "50%"
+            }
+        };
+        var chart8 = new google.visualization.ColumnChart(document.getElementById('chart_div8'));
+        chart8.draw(data8, options8);
+
+    }
+</script>
+{% endblock %}
+
+{% block main %}
+
+{# Main Content #}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+            <h2 class="post-title">What is this?</h2>
+            <p class="post-subtitle">
+                Every hour, we look at the live Twitter stream, and grab a few thousand tweets from it. We then perform an analysis of the tweets. The results are given below.
+                <br/><br/>
+                You can also look at the <a href="{{url_for('top_tweets')}}">most popular tweets</a>, or topics which are <a href="{{url_for('trends')}}">trending on
+                Twitter</a>
+            </p>
+
+            <hr>
+            <h2 class="post-title">Top Lanaguages on Twitter</h2>
+            <p class="post-subtitle">
+                We look at the most common languages in the several thousand tweets we grabbed.
+                <br/><br/>
+                Hover over the chart to see details.
+            </p>
+
+            <div id="chart_div1"></div>
+
+            <hr>
+
+            <h2 class="post-title">Top Languages in Most Retweeted Tweets</h2>
+            <p class="post-subtitle">
+                This time, we only look at the languages of Tweets that have at least 1000 retweets.
+            </p>
+            <div id="chart_div2"></div>
+
+            <hr>
+
+            <h2 class="post-title">Love Words vs Swear Words on Twitter</h2>
+            <p class="post-subtitle">
+                We look at how many people are using kind/love words, vs how many people are swearing on twitter.
+                <br/> <br/>
+                The words we looked at were:
+                <br/><br/>
+                Love words = <em> Love, Thank, Happy, Bless, etc..</em>
+                <br/><br/>
+                Swear words = <em> Idiot, Sh*t, F**k, B*t*h, etc.. </em>
+                <br/><br/>
+                We then plot the relative percentages of each.
+            </p>
+            <div id="chart_div3"></div>
+
+            <hr>
+
+            <h2 class="post-title">Mention of countries on Twitter</h2>
+            <p class="post-subtitle">
+                We measure which countries are being tweeted about.
+            </p>
+            <div id="chart_div4"></div>
+
+            <hr>
+
+            <h2 class="post-title">Top Programming Languages Mentioned on Twitter</h2>
+            <p class="post-subtitle">
+                We look at the top programming languages that are mentioned on Twitter.
+            </p>
+            <div id="chart_div5"></div>
+
+            <hr>
+
+            <h2 class="post-title">Top HashTags Trending on Twitter</h2>
+            <p class="post-subtitle">
+                We measure the most popular HashTags that are trending on Twitter.
+            </p>
+            <div id="chart_div6"></div>
+
+            <hr>
+
+            <h2 class="post-title">Top Topics Trending on Twitter</h2>
+            <p class="post-subtitle">
+                Now we look at the top topics that are trending on Twitter
+            </p>
+            <div id="chart_div7"></div>
+            <div id="chart_div8"></div>
+            <p class="post-subtitle">
+                As the data suggests the most trending topic on twitter is : <strong><em>{{trending_topic[0]}}</em></strong>
+                with <strong><em>{{trending_topic[1]}}</em></strong> mentions.
+            </p>
+            <hr>
+
+            <br/><br/>
+            <small><em> Last updated: {{datetime_twt}} GMT</em></small>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
