@@ -1,6 +1,6 @@
 import sqlite3
 
-db = "tweet-data.db"
+db = "data/tweet-data.db"
 
 # Connect to sqlite3 DB
 conn = sqlite3.connect(db)
