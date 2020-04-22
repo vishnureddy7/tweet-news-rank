@@ -1,24 +1,28 @@
-# Identifying and grading news using social media factors
+# tweet news rank - Identifying and grading news using social media factors
 
-### This is a twiter data analyser. That analyse twitter data in real time. It gets twitter data using Twitter API, analyses it and create graphs based on that data and ranks the most popular topic being discussed on twitter
+This is a twitter data analyser in real time. It gets twitter data using Twitter API, analyses it, categorize the news and  create graphs based on the generated data and rank the most popular topic that is being discussed on twitter.
 
-## Installation
+### Steps to run the Project
 
-    pip3 install -r requirements.txt
+1. ##### Install the required modules
 
+    ```pip3 install -r requirements.txt```
 
-## Usage
+2. ##### Key generation
 
-##### Create a twitter developer account and Gets keys from `keys and access tokens` and put in local_config.py file.
-#### then run this python files
+    To run this project you need twitter access key, access secret, consumer key and consumer secret, You can generate these by raising a request for twitter developer account at http://dev.twitter.com/.
 
-    python3 create-db.py
-    python3 tweet.py
+3. ##### Update Keys in Project
 
->**tweet.py** will take some time to get results from twitter.
+    After generating the keys place them inside local_config.py file.
 
-#### All data are saved now in database. Now we can run the web application.
+4. ##### Get Twitter data
 
-    python3 app.py
+    ```python3 create-db.py```
+    ```python3 tweet.py```
+    > This will take some time depending on number of tweets configured in tweet.py
 
-#### Open localhost(:5000 or whatever the port) then see result.
+5. ##### Run Flask Web App
+
+    ```python3 app.py```
+    > Open http://localhost:5000/ to see the twitter data analysis.
